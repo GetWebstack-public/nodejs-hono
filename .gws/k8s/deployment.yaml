@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-hono
+  namespace: nodejs-hono
+  labels:
+    app: nodejs-hono
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-hono
+  template:
+    metadata:
+      labels:
+        app: nodejs-hono
+    spec:
+      containers:
+      - name: nodejs-hono
+        image: nodejs-hono
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+      restartPolicy: Always
